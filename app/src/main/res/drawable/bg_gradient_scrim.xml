@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 顶部向下淡出的黑色渐变，用于播放器控件遮罩 -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <gradient
+        android:angle="270"
+        android:startColor="#B3000000"
+        android:endColor="#00000000"
+        android:type="linear" />
+</shape>

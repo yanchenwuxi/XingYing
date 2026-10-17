@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 设置行：圆角卡片 + 点击水波纹 -->
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="#22FFFFFF">
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@color/surface_container" />
+            <corners android:radius="12dp" />
+        </shape>
+    </item>
+</ripple>

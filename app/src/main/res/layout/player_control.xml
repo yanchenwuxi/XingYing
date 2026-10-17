@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  播放器自定义控制条（替代 Media3 默认样式）。
+  exo_play / exo_pause / exo_position / exo_progress / exo_duration 这组 id
+  由 PlayerControlView 自动接线；其余按钮由 PlayerActivity 手动接线。
+
+  布局对齐影视仓（DKPlayer 控制条）：播放 → 当前时间 → 进度 → 总时长 →
+  画面比例 → 下一集 → 选集 → 全屏，一行排开，不再把功能全塞进顶栏。
+
+  注意：进度与按钮必须写在同一行。实测 PlayerControlView 会把纵向布局的
+  进度行抽到屏幕顶部、按钮行留在底部（疑似其内部按 exo_progress 做了
+  reparent），单行布局无从拆起，显示才正常。
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="64dp"
+    android:layout_gravity="bottom"
+    android:background="@drawable/bg_gradient_scrim_bottom"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingStart="4dp"
+    android:paddingEnd="4dp"
+    android:paddingBottom="10dp">
+
+    <ImageButton
+        android:id="@id/exo_play"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="播放"
+        android:src="@drawable/ic_play"
+        app:tint="#FFFFFF" />
+
+    <ImageButton
+        android:id="@id/exo_pause"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="暂停"
+        android:src="@drawable/ic_pause"
+        app:tint="#FFFFFF" />
+
+    <TextView
+        android:id="@id/exo_position"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:minWidth="46dp"
+        android:textColor="#DDDDDD"
+        android:textSize="12sp" />
+
+    <androidx.media3.ui.DefaultTimeBar
+        android:id="@id/exo_progress"
+        android:layout_width="0dp"
+        android:layout_height="26dp"
+        android:layout_weight="1"
+        app:buffered_color="#66FFFFFF"
+        app:played_color="@color/primary"
+        app:scrubber_color="@color/primary"
+        app:unplayed_color="#44FFFFFF" />
+
+    <TextView
+        android:id="@id/exo_duration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:minWidth="46dp"
+        android:textColor="#DDDDDD"
+        android:textSize="12sp" />
+
+    <ImageButton
+        android:id="@+id/btnAspect"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="画面比例"
+        android:src="@drawable/ic_aspect"
+        app:tint="#FFFFFF" />
+
+    <ImageButton
+        android:id="@+id/btnNextEp"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="下一集"
+        android:src="@drawable/ic_next"
+        app:tint="#FFFFFF" />
+
+    <ImageButton
+        android:id="@+id/btnEpisodes"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="选集"
+        android:src="@drawable/ic_episodes"
+        app:tint="#FFFFFF" />
+
+    <ImageButton
+        android:id="@+id/btnFullscreen"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="全屏切换"
+        android:src="@drawable/ic_fullscreen"
+        app:tint="#FFFFFF" />
+</LinearLayout>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 详情头图底部的渐隐：从透明过渡到页面背景，让头图自然沉入内容区 -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <gradient
+        android:angle="270"
+        android:startColor="#00000000"
+        android:endColor="@color/background"
+        android:type="linear" />
+</shape>

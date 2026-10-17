@@ -1,0 +1,47 @@
+{
+  "wallpaper": "",
+  "sites": [
+    {
+      "key": "demo_json",
+      "name": "演示·JSON采集",
+      "type": 1,
+      "api": "https://api.examplecms.com/api.php/provide/vod/at/json",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 0,
+      "categories": ["电影", "连续剧", "综艺", "动漫"]
+    },
+    {
+      "key": "demo_xml",
+      "name": "演示·XML采集",
+      "type": 0,
+      "api": "https://api.examplecms.com/api.php/provide/vod/xml",
+      "searchable": 1,
+      "filterable": 0
+    },
+    {
+      "key": "demo_t4",
+      "name": "演示·T4聚合",
+      "type": 4,
+      "api": "https://example.com/api/vod",
+      "searchable": 1,
+      "filterable": 0
+    },
+    {
+      "key": "demo_py",
+      "name": "演示·Python源",
+      "type": 3,
+      "api": "py_demo",
+      "ext": "https://example.com/spider/demo.py",
+      "searchable": 1,
+      "filterable": 0
+    }
+  ],
+  "parses": [
+    { "name": "示例解析", "type": 1, "url": "https://example.com/jx/?url=" }
+  ],
+  "lives": [
+    { "name": "示例直播", "type": 0, "url": "https://example.com/live.txt" }
+  ],
+  "_note": "此为接口格式示例：请在 设置 中填入你自己的 TVBox 接口地址。演示站点地址为占位符，不代表可用资源。"
+}

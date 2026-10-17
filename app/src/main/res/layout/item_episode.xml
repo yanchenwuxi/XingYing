@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 选集：圆角胶囊，选中态填充主色 -->
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tvEpisode"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="4dp"
+    android:background="@drawable/bg_chip"
+    android:ellipsize="end"
+    android:foreground="?attr/selectableItemBackground"
+    android:gravity="center"
+    android:maxLines="1"
+    android:maxWidth="118dp"
+    android:minWidth="72dp"
+    android:paddingStart="12dp"
+    android:paddingTop="9dp"
+    android:paddingEnd="12dp"
+    android:paddingBottom="9dp"
+    android:textColor="@color/text_primary"
+    android:textSize="12sp" />

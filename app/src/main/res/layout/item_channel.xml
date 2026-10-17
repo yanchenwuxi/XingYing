@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 频道行：序号 + 频道名 +（当前播放标记）。
+     直播页改版后频道是纵向列表、与左侧分组列并排，
+     行内不再放台标：台标数量庞大且大多缺图，留给顶部的当前频道卡展示。 -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="6dp"
+    android:layout_marginEnd="6dp"
+    android:layout_marginTop="2dp"
+    android:layout_marginBottom="2dp"
+    android:background="@drawable/bg_live_channel"
+    android:clickable="true"
+    android:focusable="true"
+    android:gravity="center_vertical"
+    android:minHeight="44dp"
+    android:orientation="horizontal"
+    android:paddingStart="10dp"
+    android:paddingEnd="10dp">
+
+    <TextView
+        android:id="@+id/tvIndex"
+        android:layout_width="26dp"
+        android:layout_height="wrap_content"
+        android:fontFeatureSettings="tnum"
+        android:maxLines="1"
+        android:textColor="@color/text_muted"
+        android:textSize="12sp"
+        tools:text="01" />
+
+    <TextView
+        android:id="@+id/tvName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:ellipsize="marquee"
+        android:maxLines="1"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:textColor="@color/text_primary"
+        android:textSize="14sp"
+        tools:text="CCTV1 综合" />
+
+    <TextView
+        android:id="@+id/tvPlaying"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxLines="1"
+        android:text="@string/live_now_playing"
+        android:textColor="@color/secondary"
+        android:textSize="11sp"
+        android:visibility="gone"
+        tools:text="直播中" />
+</LinearLayout>

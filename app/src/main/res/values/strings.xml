@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">星影</string>
+
+    <string name="nav_home">首页</string>
+    <string name="nav_live">直播</string>
+    <string name="nav_search">搜索</string>
+    <string name="nav_mine">我的</string>
+    <string name="nav_short">短剧</string>
+    <string name="refresh">刷新</string>
+
+    <string name="hint_config_url">输入 TVBox 接口地址（json）</string>
+    <string name="save">保存</string>
+    <string name="empty_list">暂无内容</string>
+    <string name="play">播放</string>
+    <string name="collect">收藏</string>
+    <string name="uncollect">取消收藏</string>
+    <string name="loading">加载中…</string>
+
+    <string name="continue_watch">继续观看</string>
+    <string name="history_empty">还没有观看记录</string>
+    <string name="favorites_empty">还没有收藏</string>
+    <string name="search_hint">搜索影片、剧集、演员</string>
+    <string name="search_history">搜索历史</string>
+    <string name="no_history">输入关键词开始搜索</string>
+    <string name="no_result">没有找到相关内容</string>
+    <string name="live_empty">当前配置没有直播源\n可在设置里添加支持 lives 的接口</string>
+    <string name="live_no_channel">未选择频道</string>
+    <string name="live_hint_pick">点下方频道列表即可在本页直接观看</string>
+    <string name="live_placeholder">选择下方频道开始播放</string>
+    <string name="live_badge">直播</string>
+    <string name="live_source_switch">换源</string>
+    <string name="live_source_title">切换直播源</string>
+    <string name="live_fullscreen">全屏</string>
+    <string name="live_group_all">全部</string>
+    <string name="live_now_playing">直播中</string>
+    <string name="line">线路</string>
+    <string name="episode">选集</string>
+    <string name="switch_line">切换线路</string>
+    <string name="speed">倍速</string>
+    <string name="lock">锁定</string>
+    <string name="unlock">已锁定，点击解锁</string>
+    <string name="pip">小窗</string>
+    <string name="sources">接口源</string>
+    <string name="about">关于</string>
+</resources>

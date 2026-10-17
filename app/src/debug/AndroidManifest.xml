@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 仅 debug 构建使用：测试探针页，release 包不包含。 -->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <application>
+        <activity
+            android:name="com.xing.tv.ProbeActivity"
+            android:exported="true"
+            android:label="XingYing Probe" />
+
+        <!-- 仅 debug 构建导出播放器，便于自动化验证真实播放链路。
+             只覆盖 exported 一个属性，其余（横屏、PiP、configChanges、主题）
+             全部继承主清单，避免两份清单各写一遍而漂移。 -->
+        <activity
+            android:name="com.xing.tv.ui.PlayerActivity"
+            android:exported="true"
+            tools:replace="android:exported" />
+    </application>
+</manifest>

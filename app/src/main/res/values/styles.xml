@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 圆角形状预设与通用组件样式 -->
+<resources>
+    <!-- 海报卡片 -->
+    <style name="Corner.Poster" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">12dp</item>
+    </style>
+
+    <!-- 通用卡片 -->
+    <style name="Corner.Card" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">16dp</item>
+    </style>
+
+    <!-- 小卡片（历史缩略图、播放器面板） -->
+    <style name="Corner.Small" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">8dp</item>
+    </style>
+
+    <!-- 胶囊（按钮） -->
+    <style name="Corner.Pill" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <!-- 底部导航标签字号 -->
+    <style name="BottomNav.Text" parent="TextAppearance.Material3.LabelSmall">
+        <item name="android:textSize">11sp</item>
+    </style>
+
+    <!-- 设置/我的页的分组标题 -->
+    <style name="Section.Title" parent="TextAppearance.Material3.TitleSmall">
+        <item name="android:textColor">@color/text_secondary</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:letterSpacing">0.08</item>
+    </style>
+</resources>

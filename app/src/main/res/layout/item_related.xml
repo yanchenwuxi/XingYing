@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 同类推荐横滑卡：固定宽度的海报 + 片名，配合横向 RecyclerView -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="104dp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="4dp">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/ivPoster"
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        android:background="@color/surface_container"
+        android:contentDescription="海报"
+        android:scaleType="centerCrop"
+        app:shapeAppearanceOverlay="@style/Corner.Poster" />
+
+    <TextView
+        android:id="@+id/tvName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:paddingTop="5dp"
+        android:textColor="@color/text_primary"
+        android:textSize="12sp" />
+</LinearLayout>

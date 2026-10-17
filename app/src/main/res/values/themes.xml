@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.XingYing" parent="Theme.Material3.Dark.NoActionBar">
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorOnPrimary">@color/on_primary</item>
+        <item name="colorPrimaryContainer">@color/primary_container</item>
+        <item name="colorOnPrimaryContainer">@color/on_primary_container</item>
+        <item name="colorSecondary">@color/secondary</item>
+
+        <item name="android:colorBackground">@color/background</item>
+        <item name="colorSurface">@color/surface</item>
+        <item name="colorSurfaceContainer">@color/surface_container</item>
+        <item name="colorOnSurface">@color/text_primary</item>
+        <item name="colorOnSurfaceVariant">@color/text_secondary</item>
+        <item name="colorOutline">@color/outline</item>
+
+        <item name="android:windowBackground">@color/background</item>
+        <!-- 顶部沉浸：状态栏透明，由页面自己留出 padding -->
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@color/background</item>
+        <item name="android:windowLightStatusBar">false</item>
+
+        <item name="android:textColorPrimary">@color/text_primary</item>
+        <item name="android:textColorSecondary">@color/text_secondary</item>
+        <item name="android:alertDialogTheme">@style/Dialog.XingYing</item>
+    </style>
+
+    <style name="Theme.XingYing.Player" parent="Theme.XingYing">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowBackground">@android:color/black</item>
+    </style>
+
+    <!-- 底部弹窗统一外观（换速、换源、配置源选择等都用它） -->
+    <style name="Dialog.XingYing" parent="ThemeOverlay.Material3.MaterialAlertDialog">
+        <item name="colorSurface">@color/surface_high</item>
+        <item name="android:windowBackground">@color/surface_high</item>
+        <item name="buttonBarPositiveButtonStyle">@style/Button.XingYing</item>
+        <item name="buttonBarNegativeButtonStyle">@style/Button.XingYing</item>
+    </style>
+
+    <style name="Button.XingYing" parent="Widget.Material3.Button.TextButton.Dialog">
+        <item name="android:textColor">@color/primary</item>
+    </style>
+
+    <!-- 底部弹出统一样式：接口源 / 筛选 / 播放器设置都用 BottomSheetDialog + 它 -->
+    <style name="Sheet.XingYing" parent="ThemeOverlay.Material3.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/SheetStyle.XingYing</item>
+    </style>
+
+    <style name="SheetStyle.XingYing" parent="Widget.Material3.BottomSheet.Modal">
+        <item name="backgroundTint">@color/surface_high</item>
+    </style>
+</resources>

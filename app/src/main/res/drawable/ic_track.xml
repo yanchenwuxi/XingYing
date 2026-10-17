@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 字幕 / 音轨入口图标：圆角字幕框 + 两行字幕文本（evenOdd 挖空） -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <path
+        android:fillColor="#FF000000"
+        android:fillType="evenOdd"
+        android:pathData="M4,4.5 h16 a2.5,2.5 0 0 1 2.5,2.5 v10 a2.5,2.5 0 0 1 -2.5,2.5 h-16 a2.5,2.5 0 0 1 -2.5,-2.5 v-10 a2.5,2.5 0 0 1 2.5,-2.5 z M5.5,9 h13 v2 h-13 z M5.5,13 h8.5 v2 h-8.5 z" />
+</vector>
