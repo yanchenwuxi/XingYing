@@ -94,8 +94,17 @@ class LiveFragment : Fragment(R.layout.fragment_live) {
 
         b.btnSwap.setOnClickListener { showSourcePicker() }
         b.btnFull.setOnClickListener { openFullscreen() }
-        // 内嵌态不放控制器，点画面转全屏（进度/音轨/倍速等控件都在全屏页）
-        b.playerView.setOnClickListener { openFullscreen() }
+        // 点播放器：显示/隐藏内嵌控件；全屏仅通过全屏按钮进入
+        b.playerView.useController = true
+        b.playerView.controllerAutoShow = true
+        b.playerView.controllerShowTimeoutMs = 3000
+        b.playerView.setOnClickListener {
+            if (b.playerView.isControllerFullyVisible) {
+                b.playerView.hideController()
+            } else {
+                b.playerView.showController()
+            }
+        }
 
         if (ConfigHolder.config.lives.isEmpty()) ensureConfig()
         renderHeader()

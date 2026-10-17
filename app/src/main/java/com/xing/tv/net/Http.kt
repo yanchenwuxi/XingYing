@@ -51,8 +51,8 @@ object Http {
     fun init(context: Context) {
         appContext = context.applicationContext
         client = OkHttpClient.Builder()
-            .connectTimeout(15, TimeUnit.SECONDS)
-            .readTimeout(25, TimeUnit.SECONDS)
+            .connectTimeout(10, TimeUnit.SECONDS)
+            .readTimeout(18, TimeUnit.SECONDS)
             .writeTimeout(25, TimeUnit.SECONDS)
             .retryOnConnectionFailure(true)
             .cookieJar(PersistentCookieJar(appContext))

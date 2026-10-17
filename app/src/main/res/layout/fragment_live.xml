@@ -57,7 +57,7 @@
             app:resize_mode="fit"
             app:show_buffering="when_playing"
             app:surface_type="texture_view"
-            app:use_controller="false" />
+            app:use_controller="true" />
 
         <TextView
             android:id="@+id/tvBadge"

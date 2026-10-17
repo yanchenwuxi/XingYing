@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/nav_home" android:icon="@drawable/ic_home" android:title="@string/nav_home" />
-    <item android:id="@+id/nav_short" android:icon="@drawable/ic_short" android:title="@string/nav_short" />
-    <item android:id="@+id/nav_live" android:icon="@drawable/ic_live" android:title="@string/nav_live" />
-    <item android:id="@+id/nav_mine" android:icon="@drawable/ic_mine" android:title="@string/nav_mine" />
+    <item android:id="@+id/nav_home" android:icon="@drawable/ic_tab_home" android:title="@string/nav_home" />
+    <item android:id="@+id/nav_live" android:icon="@drawable/ic_tab_live" android:title="@string/nav_live" />
+    <item android:id="@+id/nav_short" android:icon="@drawable/ic_tab_short" android:title="@string/nav_short" />
+    <item android:id="@+id/nav_history" android:icon="@drawable/ic_tab_history" android:title="@string/nav_history" />
+    <item android:id="@+id/nav_mine" android:icon="@drawable/ic_tab_mine" android:title="@string/nav_mine" />
 </menu>

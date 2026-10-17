@@ -70,6 +70,6 @@
         app:itemTextAppearanceActive="@style/BottomNav.Text"
         app:itemTextAppearanceInactive="@style/BottomNav.Text"
         app:itemTextColor="@color/bottom_nav_text"
-        app:labelVisibilityMode="unlabeled"
+        app:labelVisibilityMode="labeled"
         app:menu="@menu/bottom_nav" />
 </LinearLayout>

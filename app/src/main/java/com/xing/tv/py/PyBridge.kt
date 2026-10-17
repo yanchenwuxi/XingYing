@@ -52,12 +52,13 @@ object PyBridge {
             ensureStarted(context)
             val dir = pyRoot(context)
 
-            // 公共库先备好：脚本可能是 URL 下的，也可能来自爬虫包，两种都要 base/
+            // 公共库 + 全局爬虫包（多数 py 脚本只写 api=py_xxx，真实文件在 jar 里）
             runCatching { ensurePyBase(key, dir) }
+            runCatching { ensureSpiderJarReady() }
 
             val scriptFile = resolveScriptFile(dir, key, api, ext)
             if (scriptFile == null || !scriptFile.exists() || scriptFile.length() == 0L) {
-                lastError = "找不到 Python 脚本（api=$api ext=$ext）。请确认 ext 或 api 指向可下载的 .py 地址"
+                lastError = "找不到 Python 脚本（api=$api ext=$ext jar=${com.xing.tv.api.ConfigHolder.spiderJar}）。请确认配置含 spider 爬虫包，或 ext/api 为 .py 地址"
                 Log.e(TAG, lastError)
                 spiders.remove(key)
                 return false
@@ -200,15 +201,19 @@ object PyBridge {
         // 先补公共库：TVBox 的 py 脚本普遍 `from base.spider import Spider`
         extractPyBase(pkg, dir)
 
-        val bare = api.removePrefix("py_").removePrefix("./").substringAfterLast('/')
+        val bare = api.removePrefix("py_").removePrefix("./").removePrefix("py/").substringAfterLast('/')
+            .removeSuffix(".py")
         val names = listOf(
-            if (bare.endsWith(".py")) bare else "$bare.py",
+            "$bare.py",
+            "py_$bare.py",
+            bare,
             ext.removePrefix("./").substringAfterLast('/').takeIf { it.endsWith(".py") } ?: "",
-            "$key.py"
+            "$key.py",
+            "py_$key.py"
         ).filter { it.isNotBlank() }.distinct()
 
         for (name in names) {
-            for (prefix in listOf("py/", "", "python/")) {
+            for (prefix in listOf("py/", "python/", "spider/", "scripts/", "")) {
                 val bytes = runCatching {
                     com.xing.tv.spider.js.JarLoader.entry(pkg, prefix + name)
                 }.getOrNull() ?: continue
@@ -230,6 +235,14 @@ object PyBridge {
      * 影视仓那套 py 源几乎都写 `from base.spider import Spider`，而 base/ 目录
      * 不在配置里、只在包里。少了它，脚本 exec 阶段就 ImportError。
      */
+    /** 预下载配置里的全局 spider jar，供 py 脚本 extractFromJar 使用 */
+    private fun ensureSpiderJarReady() {
+        val spec = com.xing.tv.api.ConfigHolder.spiderJar?.takeIf { it.isNotBlank() } ?: return
+        runCatching {
+            com.xing.tv.spider.js.JarLoader.ensure(spec)
+        }.onFailure { Log.w(TAG, "ensure spider jar failed: $spec", it) }
+    }
+
     private fun ensurePyBase(key: String, dir: File) {
         // 先从 APK assets 落一份最小 base.spider，保证 from base.spider import Spider 可用
         extractBaseFromAssets(dir)
@@ -294,8 +307,7 @@ object PyBridge {
     }
 
     private fun needDownload(f: File): Boolean =
-        !f.exists() || f.length() == 0L ||
-            (System.currentTimeMillis() - f.lastModified() > 7L * 24 * 3600_000) // 7 天刷新
+        !f.exists() || f.length() == 0L
 
     private fun fileNameFromUrl(url: String, fallback: String): String {
         val raw = url.substringAfterLast('/').substringBefore('?').ifBlank { fallback }

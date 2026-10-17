@@ -12,8 +12,8 @@ android {
         applicationId "com.xing.tv"
         minSdk 24
         targetSdk 34
-        versionCode 6
-        versionName "1.4.1"
+        versionCode 7
+        versionName "1.4.2"
 
         // Chaquopy 的 Python 解释器是预编译 so，只需声明 ABI，无需安装 NDK。
         // 仅输出 64 位（与主流手机一致，减小包体）。

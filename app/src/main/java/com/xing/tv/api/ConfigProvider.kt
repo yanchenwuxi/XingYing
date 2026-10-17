@@ -22,7 +22,7 @@ object ConfigProvider {
      * @param url 为空时取当前生效地址
      * @param force 忽略磁盘缓存重新拉取（下拉刷新时用）
      */
-    fun fetch(url: String = activeUrl(), force: Boolean = true): TvConfig {
+    fun fetch(url: String = activeUrl(), force: Boolean = false): TvConfig {
         val cfg = if (url.startsWith(ASSET_PREFIX)) {
             val text = com.xing.tv.App.instance.assets
                 .open(url.removePrefix(ASSET_PREFIX))

@@ -9,15 +9,11 @@ import com.xing.tv.R
 import com.xing.tv.databinding.ActivityMainBinding
 
 /**
- * 主界面：底部四标签（首页 / 短剧 / 直播 / 我的）的容器。
- *
- * Fragment 常驻并以 show/hide 切换，保留各 tab 状态。
- * 返回键优先退回首页 tab。
+ * 主界面：底栏对齐星海（主页 / 直播 / 短剧 / 历史 / 我的）。
  */
 class MainActivity : AppCompatActivity() {
 
     private lateinit var b: ActivityMainBinding
-
     private val fragments = HashMap<Int, Fragment>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,13 +40,17 @@ class MainActivity : AppCompatActivity() {
                     requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
                     show(TAG_HOME)
                 }
+                R.id.nav_live -> {
+                    requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_SENSOR
+                    show(TAG_LIVE)
+                }
                 R.id.nav_short -> {
                     requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
                     show(TAG_SHORT)
                 }
-                R.id.nav_live -> {
-                    requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_SENSOR
-                    show(TAG_LIVE)
+                R.id.nav_history -> {
+                    requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+                    show(TAG_HISTORY)
                 }
                 R.id.nav_mine -> {
                     requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
@@ -65,8 +65,7 @@ class MainActivity : AppCompatActivity() {
 
     @Deprecated("Deprecated in Java")
     override fun onBackPressed() {
-        val current = b.bottomNav.selectedItemId
-        if (current != R.id.nav_home) {
+        if (b.bottomNav.selectedItemId != R.id.nav_home) {
             b.bottomNav.selectedItemId = R.id.nav_home
         } else {
             @Suppress("DEPRECATION")
@@ -118,22 +117,25 @@ class MainActivity : AppCompatActivity() {
 
     private fun idOf(tag: String): Int = when (tag) {
         TAG_HOME -> R.id.nav_home
-        TAG_SHORT -> R.id.nav_short
         TAG_LIVE -> R.id.nav_live
+        TAG_SHORT -> R.id.nav_short
+        TAG_HISTORY -> R.id.nav_history
         else -> R.id.nav_mine
     }
 
     private fun newFragment(tag: String): Fragment = when (tag) {
         TAG_HOME -> HomeFragment()
-        TAG_SHORT -> ShortFragment()
         TAG_LIVE -> LiveFragment()
+        TAG_SHORT -> ShortFragment()
+        TAG_HISTORY -> HistoryFragment()
         else -> MineFragment()
     }
 
     companion object {
         private const val TAG_HOME = "home"
-        private const val TAG_SHORT = "short"
         private const val TAG_LIVE = "live"
+        private const val TAG_SHORT = "short"
+        private const val TAG_HISTORY = "history"
         private const val TAG_MINE = "mine"
     }
 }

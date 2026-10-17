@@ -61,11 +61,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         b.searchBar.setOnClickListener {
             startActivity(Intent(requireContext(), SearchActivity::class.java))
         }
-        b.btnSiteSwitch.setOnClickListener { showSitePicker() }
-        b.btnSiteSwitch.setOnLongClickListener {
-            openSources()
-            true
-        }
+        b.btnLogo.setOnClickListener { openSources() }
+b.btnLogo.setOnLongClickListener { openSources(); true }
+b.tvSiteName.setOnClickListener { openSources() }
         b.btnRefresh.setOnClickListener {
             Toast.makeText(requireContext(), "正在刷新…", Toast.LENGTH_SHORT).show()
             vm.reload()
@@ -214,21 +212,11 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
 
     private fun renderSiteName() {
-        if (_b == null) return
         val site = vm.currentSite.value
-        val raw = site?.name?.stripEmoji().orEmpty().ifEmpty { site?.key.orEmpty() }
-        // 搜索条内显示当前站点名（星海样式）；无站点时回落搜索提示
-        b.tvSiteName.text = when {
-            raw.isEmpty() -> getString(R.string.search_hint)
-            raw.length <= 10 -> raw
-            else -> raw.take(10) + "…"
-        }
-        b.tvSiteName.setTextColor(
-            requireContext().getColor(
-                if (raw.isEmpty()) R.color.text_muted else R.color.text_secondary
-            )
-        )
-        b.tvSiteName.visibility = View.VISIBLE
+        val raw = site?.name?.stripEmoji()?.ifBlank { site.key } ?: "未配置接口"
+        val name = if (raw.length > 7) raw.take(7) else raw
+        b.tvSiteName.text = name
+        b.tvSiteName.setTextColor(requireContext().getColor(R.color.text_primary))
     }
 
     // ---------- 接口行 ----------
@@ -264,19 +252,82 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private fun showCategoryPicker() {
         val ctx = context ?: return
         val cats = vm.categories.value.orEmpty()
-        if (cats.isEmpty()) return
         val all = listOf(Category("", "推荐")) + cats
-        val names = all.map { it.name }.toTypedArray()
+        if (all.isEmpty()) return
         val selected = vm.selectedCategory.value.orEmpty()
-        val checked = all.indexOfFirst { it.id == selected }.coerceAtLeast(0)
-        MaterialAlertDialogBuilder(ctx, R.style.Dialog_XingYing)
-            .setTitle("全部分类（${all.size}）")
-            .setSingleChoiceItems(names, checked) { dialog, which ->
-                dialog.dismiss()
-                vm.selectCategory(all[which].id)
+
+        val root = LinearLayout(ctx).apply {
+            orientation = LinearLayout.VERTICAL
+            setBackgroundResource(R.drawable.bg_sheet_translucent)
+            setPadding(ctx.dp(14), ctx.dp(10), ctx.dp(14), ctx.dp(18))
+        }
+        root.addView(View(ctx).apply {
+            layoutParams = LinearLayout.LayoutParams(ctx.dp(40), ctx.dp(4)).apply {
+                gravity = android.view.Gravity.CENTER_HORIZONTAL
+                bottomMargin = ctx.dp(10)
             }
-            .setNegativeButton("取消", null)
-            .show()
+            setBackgroundColor(0xFFFFB40A.toInt())
+        })
+        val titleRow = LinearLayout(ctx).apply {
+            orientation = LinearLayout.HORIZONTAL
+            gravity = android.view.Gravity.CENTER_VERTICAL
+        }
+        titleRow.addView(android.widget.TextView(ctx).apply {
+            text = "全部分类"
+            textSize = 16f
+            setTextColor(ctx.getColor(R.color.text_primary))
+            typeface = android.graphics.Typeface.DEFAULT_BOLD
+            layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f)
+        })
+        val closeBtn = android.widget.ImageView(ctx).apply {
+            setImageResource(R.drawable.ic_close)
+            imageTintList = android.content.res.ColorStateList.valueOf(ctx.getColor(R.color.text_secondary))
+            setPadding(ctx.dp(8), ctx.dp(8), ctx.dp(8), ctx.dp(8))
+        }
+        titleRow.addView(closeBtn)
+        root.addView(titleRow)
+
+        val grid = android.widget.GridLayout(ctx).apply {
+            columnCount = 3
+            setPadding(0, ctx.dp(12), 0, 0)
+        }
+        val sheetRef = arrayOf<com.google.android.material.bottomsheet.BottomSheetDialog?>(null)
+        all.forEach { cat ->
+            val cell = android.widget.TextView(ctx).apply {
+                text = cat.name
+                textSize = 13f
+                gravity = android.view.Gravity.CENTER
+                setPadding(ctx.dp(8), ctx.dp(12), ctx.dp(8), ctx.dp(12))
+                setBackgroundResource(R.drawable.bg_chip_panel)
+                val on = cat.id == selected
+                setTextColor(ctx.getColor(if (on) R.color.primary else R.color.text_primary))
+                layoutParams = android.widget.GridLayout.LayoutParams().apply {
+                    width = 0
+                    height = LinearLayout.LayoutParams.WRAP_CONTENT
+                    columnSpec = android.widget.GridLayout.spec(android.widget.GridLayout.UNDEFINED, 1f)
+                    setMargins(ctx.dp(4), ctx.dp(4), ctx.dp(4), ctx.dp(4))
+                }
+                setOnClickListener {
+                    sheetRef[0]?.dismiss()
+                    vm.selectCategory(cat.id)
+                }
+            }
+            grid.addView(cell)
+        }
+        val scroll = android.widget.ScrollView(ctx).apply {
+            addView(grid)
+            layoutParams = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                (ctx.resources.displayMetrics.heightPixels * 0.55f).toInt()
+            )
+        }
+        root.addView(scroll)
+        val sheet = com.google.android.material.bottomsheet.BottomSheetDialog(ctx, R.style.Sheet_XingYing)
+        sheet.setContentView(root)
+        sheet.window?.setDimAmount(0.45f)
+        closeBtn.setOnClickListener { sheet.dismiss() }
+        sheetRef[0] = sheet
+        sheet.show()
     }
 
     /** 站点列表弹窗：当前站点打勾，点按即切换 */

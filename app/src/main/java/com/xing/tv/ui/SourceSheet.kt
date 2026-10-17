@@ -51,6 +51,7 @@ object SourceSheet {
         val dialog = BottomSheetDialog(ctx, R.style.Sheet_XingYing)
         val root = LinearLayout(ctx).apply {
             orientation = LinearLayout.VERTICAL
+            setBackgroundResource(R.drawable.bg_sheet_translucent)
             val pad = ctx.dp(16)
             setPadding(pad, ctx.dp(8), pad, ctx.dp(16))
         }
@@ -122,8 +123,11 @@ object SourceSheet {
         }, rowParams(ctx, 1f))
         root.addView(btnRow)
 
+        root.setBackgroundResource(R.drawable.bg_sheet_translucent)
         dialog.setContentView(root)
         dialog.setOnDismissListener { activeAdapter = null }
+        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+        dialog.window?.setDimAmount(0.45f)
         dialog.show()
     }
 

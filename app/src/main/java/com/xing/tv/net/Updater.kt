@@ -23,7 +23,7 @@ object Updater {
 
     /** 可在 Prefs / 常量中改成你的发布地址 */
     const val DEFAULT_UPDATE_JSON =
-        "https://raw.githubusercontent.com/yanchenwuxi/Xinghai/main/update.json"
+        "https://raw.githubusercontent.com/yanchenwuxi/XingYing/main/update.json"
 
     data class Info(
         val versionCode: Int,

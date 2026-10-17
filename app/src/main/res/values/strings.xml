@@ -2,11 +2,12 @@
 <resources>
     <string name="app_name">星影</string>
 
-    <string name="nav_home">首页</string>
+    <string name="nav_home">主页</string>
     <string name="nav_live">直播</string>
     <string name="nav_search">搜索</string>
     <string name="nav_mine">我的</string>
     <string name="nav_short">短剧</string>
+    <string name="nav_history">历史</string>
     <string name="refresh">刷新</string>
 
     <string name="hint_config_url">输入 TVBox 接口地址（json）</string>
