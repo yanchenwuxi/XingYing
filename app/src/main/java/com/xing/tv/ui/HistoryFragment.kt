@@ -59,6 +59,7 @@ class HistoryFragment : Fragment(R.layout.fragment_history) {
                         refresh()
                     }
                     .show()
+                true
             }
         )
         b.recycler.layoutManager = LinearLayoutManager(requireContext())
